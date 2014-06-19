@@ -1,0 +1,96 @@
+/*reset*/
+body, p, input, h1, h2, h3, h4, ul, ol, li, dl, dt, dd, form {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    vertical-align: middle;
+    font-weight: normal;
+}
+html {
+    overflow-y: scroll;
+}
+body{
+    line-height: 150%;
+    -webkit-user-select: none;
+    -webkit-text-size-adjust: none;
+    font-family: Helvetica,"Microsoft YaHei";
+    background: rgba(240 ,240 ,240 ,1);
+    font-size: 14px;
+}
+button {
+    display: inline-block;
+    overflow: visible;
+    border: none;
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+    padding: .5em 1em;
+    text-transform: none;
+    text-align: center;
+    color: rgba(255, 255, 255 ,1);
+    background: rgb(0, 146, 63);
+}
+article {
+    padding: 0 .5em;
+}
+section h2 {
+    font-weight: normal;
+    color: rgba(0,146,63,1);
+    font-size: 1em;
+    margin: 0;
+}
+section h2:before {
+    content: "";
+    display: inline-block;
+    margin-left: -.5em;
+    width: 3.5em;
+    height: 3em;
+    background: url(football.png) no-repeat center center;
+    background-size: 3.5em auto;
+    -webkit-background-size: 3.5em auto;
+    vertical-align: -1em;
+}
+section button {
+    background: rgba(0,146,63,1);
+    color: white;
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+    padding: .25em 1em;
+    text-align: center;
+}
+.bhcc {
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+}
+.bvcs {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: center;
+    -webkit-box-align: start;
+}
+.board {
+    padding: 1em;
+    background: white;
+    box-sizing: border-box;
+    border: 1px black;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+}
+.banner {
+    margin: 0 -.5em;
+}
+.user {
+    padding: 0 1em;
+}
+.user h2 {
+    margin: 0 -1em;
+}
+.user .winnings{
+    -webkit-box-flex: 1;
+    color: rgba(0 ,146 ,63 ,1);
+}
+.user .guess {
+}
