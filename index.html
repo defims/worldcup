@@ -13,33 +13,47 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <!--<link rel="stylesheet" type="text/css" href="http://3gimg.qq.com/dist/webapp_worldcup/res/worldcup/css/index_20140619_174953.css" />-->
 </head>
-<body>
+<body class="worldcup">
     <article>
-        <section class="banner">
-            <img src="banner.jpg" alt="狂欢世界杯" width="100%"><!--todo new image-->
+        <section class="worldcup-section banner">
+            <img class="banner-img" src="banner.jpg" alt="狂欢世界杯" width="100%"><!--todo new image-->
         </section>
-        <section class="user">
-            <h2>下载抽大奖</h2>
-            <div class="bhcc">
-                <p class="winnings">
+        <section class="worldcup-section user">
+            <h2 class="worldcup-h2 user-h2">下载抽大奖</h2>
+            <div class="user-row">
+                <p class="user-winnings">
                     我的彩金：
                     <span data-tie="winnings">--</span>
                     元
                 </p>
-                <button class="guess">立即竞猜</button>
+                <button class="worldcup-btn">立即竞猜</button>
             </div>
             <p>下载世界杯推荐应用获得抽奖机会，免费抽取大力神杯及彩金，使用彩金即可参与世界杯竞猜，你下注，我买单，现金大奖免费送！</p>
         </section>
-        <section>
-            <div class="bvsc board">
+        <section class="worldcup-section lottory">
+            <div class="worldcup-box">
                 <p>一等奖：FIFA官方授权大力神杯（100个）</p>
                 <p>二等奖：1元彩金（每天20万份）</p>
                 <p>三等奖：彩金优惠券（每天50万份）</p>
             </div>
-            <button class="guess">立即竞猜</button>
+            <button class="worldcup-btn lottory-btn guess">下载应用，立即抽奖</button>
+            <p class="lottory-tip">中奖率高达95%以上哦！</p>
         </section>
-        <section></section>
-        <section></section>
+        <section class="worldcup-section appList">
+            <ul class="appList-list">
+                <li class="worldcup-box appList-app" data-tie="appList-app">
+                    <img data-tie="appList-logo" src="{%=apps[i].logo%}" alt="{%=apps[i].name%}" width="46" height="46" />
+                    <div class="appList-content">
+                        <div class="app-headline">
+                            <p class="no-wrap">{%=apps[i].name%}</p>
+                            <a class="btn-primary-s" id="{%=apps[i].appid%}_btn" data-appid="{%=apps[i].appid%}">{%if(apps[i].isInstalled){%}打开{%}else{%}下载{%}%}</a>
+                        </div>
+                        <p>{%=apps[i].recommend || ""%}</p>
+                    </div>
+                </li>
+            </ul>
+            <button id="changeApp" class="worldcup-btn worldcup-btn--gray appList-changeApp">换一换</button>
+        </section>
     </article>
 </body>
 </html>

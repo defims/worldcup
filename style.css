@@ -1,4 +1,10 @@
-/*reset*/
+/*
+* @description: 世界杯移动专题页面样式
+* @author: wei long
+* @update: wei long (2014-06-20 20:34)
+*/
+
+/* module: reset*/
 body, p, input, h1, h2, h3, h4, ul, ol, li, dl, dt, dd, form {
     margin: 0;
     padding: 0;
@@ -15,48 +21,9 @@ body{
     -webkit-text-size-adjust: none;
     font-family: Helvetica,"Microsoft YaHei";
     background: rgba(240 ,240 ,240 ,1);
-    font-size: 14px;
+    font-size: 14px;/*ps 24pt*/
 }
-button {
-    display: inline-block;
-    overflow: visible;
-    border: none;
-    -webkit-border-radius: 1px;
-    border-radius: 1px;
-    padding: .5em 1em;
-    text-transform: none;
-    text-align: center;
-    color: rgba(255, 255, 255 ,1);
-    background: rgb(0, 146, 63);
-}
-article {
-    padding: 0 .5em;
-}
-section h2 {
-    font-weight: normal;
-    color: rgba(0,146,63,1);
-    font-size: 1em;
-    margin: 0;
-}
-section h2:before {
-    content: "";
-    display: inline-block;
-    margin-left: -.5em;
-    width: 3.5em;
-    height: 3em;
-    background: url(football.png) no-repeat center center;
-    background-size: 3.5em auto;
-    -webkit-background-size: 3.5em auto;
-    vertical-align: -1em;
-}
-section button {
-    background: rgba(0,146,63,1);
-    color: white;
-    -webkit-border-radius: 1px;
-    border-radius: 1px;
-    padding: .25em 1em;
-    text-align: center;
-}
+/* 通用样式 */
 .bhcc {
     display: -webkit-box;
     -webkit-box-orient: horizontal;
@@ -69,28 +36,120 @@ section button {
     -webkit-box-pack: center;
     -webkit-box-align: start;
 }
-.board {
-    padding: 1em;
-    background: white;
-    box-sizing: border-box;
-    border: 1px black;
-    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
+
+/* module: worldcup 定义世界杯专题页的通用组件 */
+.worldcup {
+    padding: 0 .5em;
 }
+    /* 按钮 */
+    .worldcup-btn {
+        display: inline-block;
+        overflow: visible;
+        margin: 0;
+        border: none;
+        -webkit-border-radius: 1px;
+        border-radius: 1px;
+        padding: .5em 1.25em;
+        text-transform: none;
+        text-align: center;
+        color: white;
+        font-size: 1em;
+        background: rgba(0,146,63,1);
+    }
+    .worldcup-btn--gray {
+        color: rgb(118 ,118 ,118);
+        -webkit-box-sizing: border-box;
+        border: solid 1px rgb(203 ,203 ,203);
+        background: rgb(242 ,242 ,242);
+    }
+    /* 二级标题 */
+    .worldcup-h2 {
+        font-weight: normal;
+        color: rgba(0,146,63,1);
+        font-size: 1.25em;
+        margin: 0;
+    }
+    .worldcup-h2:before {
+        content: "";
+        display: inline-block;
+        margin-left: -.5em;
+        width: 3.5em;
+        height: 3em;
+        background: url(football.png) no-repeat center center;
+        background-size: 3.5em auto;
+        -webkit-background-size: 3.5em auto;
+        vertical-align: -1em;
+    }
+    .worldcup-section {
+        margin: .5em 0;
+    }
+    .worldcup-box {
+        padding: 1em;
+        background: white;
+        box-sizing: border-box;
+        border: 1px black;
+        -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+    }
+
+/* module: banner*/
 .banner {
     margin: 0 -.5em;
 }
+
+/* module: user*/
 .user {
     padding: 0 1em;
 }
-.user h2 {
-    margin: 0 -1em;
+    .user-h2 {
+        margin: 0 -1em;
+    }
+    .user-row {
+        display: -webkit-box;
+        margin: 0 0 .8em;
+    }
+    .user-winnings {
+        display: -webkit-box;
+        -webkit-box-flex: 1;
+        -webkit-box-align: center;
+        font-size: 1.08em;
+        color: rgb(0 ,146 ,63);
+    }
+    .user-guess {
+    }
+
+/* module: lottory */
+.lottory {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
 }
-.user .winnings{
-    -webkit-box-flex: 1;
-    color: rgba(0 ,146 ,63 ,1);
+    .lottory-btn {
+        display: block;
+        margin: .5em 0;
+        padding: .5em 1em;
+        font-size: 1.33em;
+    }
+    .lottory-tip {
+        text-align: center;
+        color: rgb(255, 121, 10);
+        font-size: .89em;
+    }
+
+/* module: appList*/
+.appList {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: center;
 }
-.user .guess {
-}
+    .appList-changeApp {
+        
+    }
+    .appList-list {
+        
+    }
+    .appList-changeApp {
+        margin: 1em 0;
+    }
