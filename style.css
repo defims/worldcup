@@ -101,14 +101,12 @@ body{
 
 /* module: user*/
 .user {
-    padding: 0 1em;
 }
     .user-h2 {
-        margin: 0 -1em;
     }
     .user-row {
         display: -webkit-box;
-        margin: 0 0 .8em;
+        margin: 0 1em .8em 1em;
     }
     .user-winnings {
         display: -webkit-box;

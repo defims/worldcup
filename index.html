@@ -23,12 +23,12 @@
             <div class="user-row">
                 <p class="user-winnings">
                     我的彩金：
-                    <span data-tie="winnings">--</span>
+                    <span data-tie="user-winnings">--</span>
                     元
                 </p>
                 <button class="worldcup-btn">立即竞猜</button>
             </div>
-            <p>下载世界杯推荐应用获得抽奖机会，免费抽取大力神杯及彩金，使用彩金即可参与世界杯竞猜，你下注，我买单，现金大奖免费送！</p>
+            <p class="user-row">下载世界杯推荐应用获得抽奖机会，免费抽取大力神杯及彩金，使用彩金即可参与世界杯竞猜，你下注，我买单，现金大奖免费送！</p>
         </section>
         <section class="worldcup-section lottory">
             <div class="worldcup-box">
@@ -40,9 +40,9 @@
             <p class="lottory-tip">中奖率高达95%以上哦！</p>
         </section>
         <section class="worldcup-section appList">
-            <ul class="appList-list">
+            <ul class="appList-list" data-tie="appList">
                 <li class="worldcup-box appList-app" data-tie="appList-app">
-                    <img data-tie="appList-logo" src="{%=apps[i].logo%}" alt="{%=apps[i].name%}" width="46" height="46" />
+                    <img data-tie="appList-icon" src="" alt="{%=apps[i].name%}" width="46" height="46" />
                     <div class="appList-content">
                         <div class="app-headline">
                             <p class="no-wrap">{%=apps[i].name%}</p>
@@ -55,6 +55,7 @@
             <button id="changeApp" class="worldcup-btn worldcup-btn--gray appList-changeApp">换一换</button>
         </section>
     </article>
+    <script src="tie.js"></script>
     <script src="main.js"></script>
 </body>
 </html>
