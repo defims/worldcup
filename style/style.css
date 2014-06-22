@@ -36,7 +36,11 @@ body{
     -webkit-box-pack: center;
     -webkit-box-align: start;
 }
-
+.no-wrap {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
 /* module: worldcup 定义世界杯专题页的通用组件 */
 .worldcup {
     padding: 0 .5em;
@@ -156,6 +160,7 @@ body{
         margin: 1em 0;
     }
     .appList-tips {
+        margin: 0 1em;
         color: rgb(85 ,85 ,85);
     }
 
@@ -215,10 +220,32 @@ body{
         counter-reset: counter;
     }
     .rule-clause {
-        line-height: 1.5em;
+        display: block;
+        line-height: 2em;
+        word-wrap: break-word;
+        word-break: break-all;
+        text-align: justify;
     }
     .rule-clause:before {
-        content: counter(counter) '.';
+        content: counter(counter) '、';
         counter-increment: counter;
         margin: .25em 0;
+    }
+
+
+/* module recommend */
+.recommend {
+    display: -webkit-box;
+}
+    .recommend-frame {
+        margin: .5em;
+        -webkit-box-flex: 1;
+        -webkit-box-pack: stretch;
+        -webkit-box-align: stretch;
+    }
+    .recommend-title {
+        text-align: center;
+    }
+    .recommend-img {
+        background: gray;
     }
