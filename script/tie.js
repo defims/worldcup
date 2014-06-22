@@ -1,6 +1,45 @@
 ;(function(win ,doc) {
 
     /*
+     * Copyright 2012 The Polymer Authors. All rights reserved.
+     * Use of this source code is governed by a BSD-style
+     * license that can be found in the LICENSE file.
+     * https://github.com/Polymer/WeakMap/blob/master/weakmap.js
+     */
+
+    if (typeof WeakMap === 'undefined') {
+      (function() {
+        var defineProperty = Object.defineProperty;
+        var counter = Date.now() % 1e9;
+
+        var WeakMap = function() {
+          this.name = '__st' + (Math.random() * 1e9 >>> 0) + (counter++ + '__');
+        };
+
+        WeakMap.prototype = {
+          set: function(key, value) {
+            var entry = key[this.name];
+            if (entry && entry[0] === key)
+              entry[1] = value;
+            else
+              defineProperty(key, this.name, {value: [key, value], writable: true});
+          },
+          get: function(key) {
+            var entry;
+            return (entry = key[this.name]) && entry[0] === key ?
+                entry[1] : undefined;
+          },
+          delete: function(key) {
+            this.set(key, undefined);
+          }
+        };
+
+        window.WeakMap = WeakMap;
+      })();
+    }
+
+
+    /*
      * =watch
      */
     function watch(obj ,prop ,handler) {
@@ -53,7 +92,7 @@
                         ;
                     o[prop] = val;
                     for(i=0; handler = handlers[prop][i]; i++) {
-                        handler(obj, prop, oldVal, val);
+                        handler(obj ,prop ,val ,oldVal);
                     }
                 }
                 ,enumerable: true
@@ -65,11 +104,11 @@
     }
     ////test
     //var a = {b:1}
-    //watch(a ,"b" ,function(obj ,prop ,oldVal ,val) {
+    //watch(a ,"b" ,function(obj ,prop ,val ,oldVal) {
     //    console.log("first" ,val)
     //})
     //a.b = 2;
-    //watch(a ,"b" ,function(obj ,prop ,oldVal ,val) {
+    //watch(a ,"b" ,function(obj ,prop ,val ,oldVal) {
     //    console.log("second" ,val)
     //})
     //a.b = 3;
@@ -99,11 +138,25 @@
     /*
      * =directives
      */
-    var directives = {};
-    directives.textContent = function(elements ,oldVal ,val) {
-        element.textContent = val;
+    var directives = {}
+        ,events = new WeakMap
+        ;
+    directives.event = function(directives ,element ,val ,oldVal) {
+        var that = this
+            ,evt = directives[0]
+            ,fn ,oldFn
+            ;
+        if(oldVal && (oldFn = events.get(oldVal))) {
+            element.removeEventListener(evt ,oldFn);
+        }
+        if(typeof(val) == "function") {
+            fn = function(e) {
+                val.call(that ,this ,e);
+            }
+            events.set(val ,fn);
+            element.addEventListener(evt ,fn);
+        }
     }
-
 
     /*
      * =tie
@@ -128,6 +181,8 @@
      *        使用引用实现简易DI
      */
     win.TIE = function(obj ,prop ,elementPoint ,elementProp ,directive) {
+        var that = this;
+
         //绑定
         var tie = new Tie;
         tie.object = obj;
@@ -136,23 +191,42 @@
         tie.elementProperty = elementProp;
 
         //更新函数
-        function update(obj ,prop ,oldVal ,val) {
+        function update(obj ,prop ,val ,oldVal) {
             var drctvtp = typeof(directive)
                 ,elements = tie.elementPoint[tie.elementProperty]
                 ;
             if(drctvtp == "string") {
+                var drctvs = directive.split(".");
                 eachElement(elements ,function(element) {
-                    if(directive in element) {//使用系统渲染指令
-                        element[directive] = val;
+                    //判断是否系统渲染指令
+                    var  system = true
+                        ,obj = element
+                        ,len = drctvs.length - 1
+                        ,i ,item
+                        ;
+                    for(i=0; i<len; i++) {
+                        item = drctvs[i];
+                        if(!(item in obj)) {
+                            system = false;
+                            break;
+                        }
+                        obj = obj[item];
                     }
-                    //todo attributes.a style.scrollTop
-                    else if(directive in directives){//使用预置渲染指令
-                        directives[directive](element ,oldVal ,val);
+                    if(system) {//执行系统渲染指令
+                        obj[drctvs[len]] = val;
+                    }
+                    else {
+                        console.log(drctvs)
+                        //如果是tie预置渲染指令则执行
+                        var item = drctvs.shift();
+                        if(item in directives && typeof(directives[item]) == "function") {
+                            directives[item].call(that ,drctvs ,element ,val ,oldVal);
+                        }
                     }
                 });
             }else if(drctvtp == "function") {//使用自定义渲染指令
                 eachElement(elements ,function(element) {
-                    directive(element ,oldVal ,val);
+                    directive(element ,val ,oldVal);
                 });
             }
         }
@@ -160,7 +234,7 @@
         //后续触发
         watch(tie.object ,tie.property ,update);//监测值变化
         watch(tie.elementPoint ,tie.elementProperty ,function() {//监测dom变化
-            update(tie.object ,tie.property ,"" ,tie.object[tie.property]);
+            update(tie.object ,tie.property ,tie.object[tie.property]);
         });
 
         //首次触发

@@ -26,7 +26,7 @@
                     <span data-tie="user-winnings">--</span>
                     元
                 </p>
-                <button class="worldcup-btn">立即竞猜</button>
+                <button data-tie="user-guess" class="worldcup-btn">立即竞猜</button>
             </div>
             <p class="user-row">下载世界杯推荐应用获得抽奖机会，免费抽取大力神杯及彩金，使用彩金即可参与世界杯竞猜，你下注，我买单，现金大奖免费送！</p>
         </section>
@@ -36,7 +36,7 @@
                 <p>二等奖：1元彩金（每天20万份）</p>
                 <p>三等奖：彩金优惠券（每天50万份）</p>
             </div>
-            <button class="worldcup-btn lottory-btn guess">下载应用，立即抽奖</button>
+            <button data-tie="lottory-guess" class="worldcup-btn lottory-btn">下载应用，立即抽奖</button>
             <p class="lottory-tip">中奖率高达95%以上哦！</p>
         </section>
         <section class="worldcup-section appList">
@@ -46,13 +46,13 @@
                     <div class="app-column">
                         <div class="app-row">
                             <p class="no-wrap app-name" data-tie="app-name"></p>
-                            <button class="worldcup-btn worldcup-btn--green app-action" id="{%=apps[i].appid%}_btn" data-tie="app-action" data-appid="{%=apps[i].appid%}"></button>
+                            <button class="worldcup-btn worldcup-btn--green app-action" data-tie="app-action"></button>
                         </div>
                         <p class="app-slogan" data-tie="app-slogan"></p>
                     </div>
                 </li>
             </ul>
-            <button id="changeApp" class="worldcup-btn worldcup-btn--gray appList-changeApp">换一换</button>
+            <button data-tie="appList-changeApp" class="worldcup-btn worldcup-btn--gray appList-changeApp">换一换</button>
             <p class="appList-tips">温馨提示：抽中大力神杯的用户请务必填写正确的联系方式哦！
                 <a class="worldcup-link"href="javascript:void(0)" id="addressLink">立即完善</a>
             </p>
