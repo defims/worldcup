@@ -216,7 +216,6 @@
                         obj[drctvs[len]] = val;
                     }
                     else {
-                        console.log(drctvs)
                         //如果是tie预置渲染指令则执行
                         var item = drctvs.shift();
                         if(item in directives && typeof(directives[item]) == "function") {

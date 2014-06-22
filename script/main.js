@@ -40,6 +40,24 @@
         referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
     }
 
+    /*
+     * =loadData
+     * @about 加载数据
+     */
+    function loadData(url ,callback) {
+        //测试下使用jsonp
+        var data;
+        win.Data = function(d) {
+            data = d;
+        }
+        var script = doc.createElement("script");
+        script.src=url;
+        script.onload = function() {
+            callback(data);
+        }
+        doc.head.appendChild(script);
+    }
+
 
     /*
      * =User
@@ -88,17 +106,19 @@
         appList.page = 1;
         appList.elements = {
             changeApp: null
+            ,contact: null
         }
 
         //绑定事件
         tie.call(appList ,appList ,"changeApp" ,appList.elements ,"changeApp" ,"event.click");
+        tie.call(appList ,appList ,"contact" ,appList.elements ,"contact" ,"event.click");
     }
     AppList.prototype.changeApp = function(element ,e) {
         var appList = this
             ,apps = appList.apps
             ,app
             ;
-        loadData("app/data"+(appList.page+1) ,function(data) {
+        loadData("app/data"+(appList.page+1)+".json" ,function(data) {
             [].forEach.call(data ,function(item ,index) {
                 app = apps[index];
                 app.icon = item.icon;
@@ -109,6 +129,10 @@
         })
         //todo 所有加载完成处理
         //todo 超时处理
+    }
+    AppList.prototype.contact = function(element ,e) {
+        //todo 更改联系人信息
+        console.log("更改联系人信息");
     }
 
 
@@ -154,29 +178,37 @@
         },100)
     }
 
-    function loadData(url ,callback) {
-        //测试下使用jsonp
-        var data;
-        win.Data = function(d) {
-            data = d;
+    /*
+     * =recommend
+     */
+    function Recommend() {
+        var recommend = this;
+        recommend.elements = {
+            recommend1: null
+            ,recommend2: null
         }
-        var script = doc.createElement("script");
-        script.src=url;
-        script.onload = function() {
-            callback(data);
-        }
-        doc.head.appendChild(script);
+
+        //绑定事件
+        tie.call(recommend ,recommend ,"jump" ,recommend.elements ,"recommend1" ,"event.click");
+        tie.call(recommend ,recommend ,"jump" ,recommend.elements ,"recommend2" ,"event.click");
     }
+    Recommend.prototype.jump = function() {
+        //todo 应用推荐逻辑
+        console.log("跳转到相应的应用介绍页")
+    }
+
     /*
      * =bootstrape
      * @about 启动
      */
     ;(function() {
+        //用户
         var user = new User;
         user.winnings = '--';
         user.elements.winnings = tie$("user-winnings");
         user.elements.guess = tie$("user-guess");
 
+        //抽奖
         var lottory = new Lottory;
         lottory.elements.guess = tie$("lottory-guess");
 
@@ -187,7 +219,7 @@
             ,frag = doc.createDocumentFragment()
             ,i ,app ,elements
             ;
-        loadData("app/data" ,function(data) {
+        loadData("app/data.json" ,function(data) {
             [].forEach.call(data ,function(item ,index) {//移动设备forEach支持度很高
                 appList.apps.push(app = new App);
                 app.elements.prototype = appElementPrototype;
@@ -210,10 +242,16 @@
             insertAfter(appElement ,frag);
         })
         appList.elements.changeApp = tie$("appList-changeApp");
+        appList.elements.contact = tie$("appList-contact");
+
+        var recommend = new Recommend;
+        recommend.elements.recommend1 = tie$("recommend1");
+        recommend.elements.recommend2 = tie$("recommend2");
 
         //暴露接口
         worldcup.user = user;
         worldcup.appList = appList;
+        worldcup.recommend = recommend;
     })();
 
 })(window ,document ,TIE ,window.WORLDCUP = window.WORLDCUP || {});
