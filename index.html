@@ -40,15 +40,15 @@
             <p class="lottory-tip">中奖率高达95%以上哦！</p>
         </section>
         <section class="worldcup-section appList">
-            <ul class="appList-list" data-tie="appList">
-                <li class="worldcup-box appList-app" data-tie="appList-app">
-                    <img data-tie="appList-icon" src="" alt="{%=apps[i].name%}" width="46" height="46" />
-                    <div class="appList-content">
-                        <div class="app-headline">
-                            <p class="no-wrap">{%=apps[i].name%}</p>
-                            <a class="btn-primary-s" id="{%=apps[i].appid%}_btn" data-appid="{%=apps[i].appid%}">{%if(apps[i].isInstalled){%}打开{%}else{%}下载{%}%}</a>
+            <ul class="appList-list">
+                <li class="worldcup-box app" data-tie="app">
+                    <img class="app-icon" data-tie="app-icon" src="" alt="" width="46" height="46" />
+                    <div class="app-column">
+                        <div class="app-row">
+                            <p class="no-wrap app-name" data-tie="app-name"></p>
+                            <button class="worldcup-btn app-action" id="{%=apps[i].appid%}_btn" data-appid="{%=apps[i].appid%}">{%if(apps[i].isInstalled){%}打开{%}else{%}下载{%}%}</button>
                         </div>
-                        <p>{%=apps[i].recommend || ""%}</p>
+                        <p data-tie="app-slogan"></p>
                     </div>
                 </li>
             </ul>

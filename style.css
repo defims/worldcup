@@ -142,12 +142,34 @@ body{
     -webkit-box-orient: vertical;
     -webkit-box-align: center;
 }
-    .appList-changeApp {
-        
-    }
     .appList-list {
-        
     }
     .appList-changeApp {
         margin: 1em 0;
     }
+
+/* module: app*/
+.app {
+    display: -webkit-box;
+    -webkit-box-orient: horizontal;
+    -webkit-box-align: start;
+    margin: 0 0 1em 0;
+}
+    .app-icon {
+        margin: 0 .5em 0 0;
+        -webkkit-border-radius: .1em;
+                 border-radius: .1em;
+        overflow: hidden;
+    }
+    .app-column {
+        -webkit-box-flex: 1;
+    }
+    .app-row {
+        display: -webkit-box;
+        -webkit-box-orient: horizontal;
+        -webkit-box-align: center;
+    }
+    .app-name {
+        -webkit-box-flex: 1;
+    }
+

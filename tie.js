@@ -101,9 +101,7 @@
      */
     var directives = {};
     directives.textContent = function(elements ,oldVal ,val) {
-        eachElement(elements ,function(element) {
-            element.textContent = val;
-        })
+        element.textContent = val;
     }
 
 
@@ -139,12 +137,23 @@
 
         //更新函数
         function update(obj ,prop ,oldVal ,val) {
-            var drctvtp = typeof(directive);
-            if(drctvtp == "string") {//使用预置的渲染指令
-                console.log(val)
-                //directives[directive](tie.elementPoint[tie.elementProperty] ,oldVal ,val);
+            var drctvtp = typeof(directive)
+                ,elements = tie.elementPoint[tie.elementProperty]
+                ;
+            if(drctvtp == "string") {
+                eachElement(elements ,function(element) {
+                    if(directive in element) {//使用系统渲染指令
+                        element[directive] = val;
+                    }
+                    //todo attributes.a style.scrollTop
+                    else if(directive in directives){//使用预置渲染指令
+                        directives[directive](element ,oldVal ,val);
+                    }
+                });
             }else if(drctvtp == "function") {//使用自定义渲染指令
-                directives(tie.elementPoint[tie.elementProperty] ,oldVal ,val);
+                eachElement(elements ,function(element) {
+                    directive(element ,oldVal ,val);
+                });
             }
         }
 

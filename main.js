@@ -13,8 +13,8 @@
      * =tie$
      * @about 适用于tie的选择器[data-tie=key]
      */
-    function tie$(key) {
-        return $("[data-tie="+key+"]")
+    function tie$(key ,root) {
+        return $("[data-tie="+key+"]" ,root)
     }
 
 
@@ -62,6 +62,7 @@
         app.icon = "";
         app.name = "";
         app.id = -1;
+        app.slogan = "";
         app.isInstalled = false;
         app.action = "";
 
@@ -75,10 +76,25 @@
         }
 
         //绑定渲染器
-        tie(app ,"icon" ,app.elements ,"icon" ,"attributes.src");
+        tie(app ,"icon" ,app.elements ,"icon" ,"src");
+        tie(app ,"name" ,app.elements ,"icon" ,"alt");
+        tie(app ,"name" ,app.elements ,"name" ,"textContent");
+        tie(app ,"slogan" ,app.elements ,"slogan" ,"textContent");
     }
 
-
+    function loadData(callback) {
+        //测试下使用jsonp
+        var data;
+        win.Data = function(d) {
+            data = d;
+        }
+        var script = doc.createElement("script");
+        script.src="app/data";
+        script.onload = function() {
+            callback(data);
+        }
+        doc.head.appendChild(script);
+    }
     /*
      * =bootstrape
      * @about 启动
@@ -90,24 +106,32 @@
 
         //应用列表
         var  appList = new AppList
-            ,appElement = tie$("appList-app")[0]
+            ,appElement = tie$("app")[0]
             ,appElementPrototype = appElement.cloneNode(true)
             ,frag = doc.createDocumentFragment()
             ,i ,app ,elements
             ;
-
-        for(i=0; i<2; i++) {
-            appList.apps.push(app = new App);
-            app.elements.prototype = appElementPrototype;
-            elements = app.elements;
-            if(i == 0) {
-                elements.app = appElement;
-            }
-            else {
-                frag.appendChild(elements.app = appElementPrototype.cloneNode(true));
-            }
-        }
-        insertAfter(appElement ,frag);
+        loadData(function(data) {
+            [].forEach.call(data ,function(item ,index) {
+                appList.apps.push(app = new App);
+                app.elements.prototype = appElementPrototype;
+                app.icon = item.icon;
+                app.name = item.name;
+                app.slogan = item.slogan;
+                //elements
+                elements = app.elements;
+                if(index == 0) {
+                    elements.app = appElement;
+                }
+                else {
+                    frag.appendChild(elements.app = appElementPrototype.cloneNode(true));
+                }
+                elements.icon = tie$("app-icon" ,elements.app)[0];
+                elements.name = tie$("app-name" ,elements.app)[0];
+                elements.slogan = tie$("app-slogan" ,elements.app)[0];
+            });
+            insertAfter(appElement ,frag);
+        })
 
         //暴露接口
         worldcup.user = user;
