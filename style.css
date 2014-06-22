@@ -62,6 +62,9 @@ body{
         border: solid 1px rgb(203 ,203 ,203);
         background: rgb(242 ,242 ,242);
     }
+    .worldcup-btn--green {
+        background: rgb(90 ,198 ,92);
+    }
     /* 二级标题 */
     .worldcup-h2 {
         font-weight: normal;
@@ -82,6 +85,10 @@ body{
     }
     .worldcup-section {
         margin: .5em 0;
+    }
+    .worldcup-link {
+        color: rgb(40 ,139 ,225);
+        text-shadow: 2px 0 2px white;
     }
     .worldcup-box {
         padding: 1em;
@@ -143,9 +150,13 @@ body{
     -webkit-box-align: center;
 }
     .appList-list {
+        width: 100%;
     }
     .appList-changeApp {
         margin: 1em 0;
+    }
+    .appList-tips {
+        color: rgb(85 ,85 ,85);
     }
 
 /* module: app*/
@@ -171,5 +182,43 @@ body{
     }
     .app-name {
         -webkit-box-flex: 1;
+        color: rgb(51 ,51 ,51);
+    }
+    .app-slogan {
+        color: rgb(167 ,167 ,167);
     }
 
+/* module inspire */
+.inspire {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: center;
+}
+    .inspire-h2 {
+        width: 100%;
+    }
+    .inspire-text {
+        -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+        margin: 1em 0;
+        padding: 0 1em;
+        width: 100%;
+        color: rgb(51 ,51 ,51);
+    }
+
+/*module rule*/
+.rule {
+    padding: 1em;
+    color: rgb(85 ,85 ,85);
+}
+    .rule-clauses {
+        counter-reset: counter;
+    }
+    .rule-clause {
+        line-height: 1.5em;
+    }
+    .rule-clause:before {
+        content: counter(counter) '.';
+        counter-increment: counter;
+        margin: .25em 0;
+    }

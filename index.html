@@ -46,13 +46,33 @@
                     <div class="app-column">
                         <div class="app-row">
                             <p class="no-wrap app-name" data-tie="app-name"></p>
-                            <button class="worldcup-btn app-action" id="{%=apps[i].appid%}_btn" data-appid="{%=apps[i].appid%}">{%if(apps[i].isInstalled){%}打开{%}else{%}下载{%}%}</button>
+                            <button class="worldcup-btn worldcup-btn--green app-action" id="{%=apps[i].appid%}_btn" data-tie="app-action" data-appid="{%=apps[i].appid%}"></button>
                         </div>
-                        <p data-tie="app-slogan"></p>
+                        <p class="app-slogan" data-tie="app-slogan"></p>
                     </div>
                 </li>
             </ul>
             <button id="changeApp" class="worldcup-btn worldcup-btn--gray appList-changeApp">换一换</button>
+            <p class="appList-tips">温馨提示：抽中大力神杯的用户请务必填写正确的联系方式哦！
+                <a class="worldcup-link"href="javascript:void(0)" id="addressLink">立即完善</a>
+            </p>
+        </section>
+        <section class="worldcup-section inspire">
+            <h2 class="worldcup-h2 inspire-h2">为冠军助威</h2>
+            <p class="inspire-text">快来支持&amp;分享你心中的冠军球队，为他助威呐喊吧！</p>
+            <button id="share" class="worldcup-btn">支持&amp;分享</button>
+        </section>
+        <section class="worldcup-section rule">
+            <h3>活动规则：</h3>
+            <ol class="rule-clauses">
+                <li class="rule-clause">仅限在本页面首次下载应用才可获得抽奖机会，重复下载不获得。</li>
+                <li class="rule-clause">从未登陆过QQ彩票的用户，彩金和优惠券到账会有延迟哦，请耐心等待。</li>
+                <li class="rule-clause">彩金和优惠券有效期为15天，过期会自动回收，请及时使用。</li>
+                <li class="rule-clause">大力神杯将在活动结束后2周内邮寄，请务必填写正确的联系方式；如因联系方式缺失或有误导致奖品无法送达，责任由中奖者承担。</li>
+                <li class="rule-clause">本活动最终解释权在法律允许范围内归腾讯所有。</li>
+            </ol>
+        </section>
+        <section class="worldcup-section recommend">
         </section>
     </article>
     <script src="tie.js"></script>

@@ -64,7 +64,7 @@
         app.id = -1;
         app.slogan = "";
         app.isInstalled = false;
-        app.action = "";
+        app.action = "下载";
 
         app.elements = {
              prototype: null
@@ -80,6 +80,7 @@
         tie(app ,"name" ,app.elements ,"icon" ,"alt");
         tie(app ,"name" ,app.elements ,"name" ,"textContent");
         tie(app ,"slogan" ,app.elements ,"slogan" ,"textContent");
+        tie(app ,"action" ,app.elements ,"action" ,"textContent");
     }
 
     function loadData(callback) {
@@ -129,6 +130,7 @@
                 elements.icon = tie$("app-icon" ,elements.app)[0];
                 elements.name = tie$("app-name" ,elements.app)[0];
                 elements.slogan = tie$("app-slogan" ,elements.app)[0];
+                elements.action = tie$("app-action" ,elements.app)[0];
             });
             insertAfter(appElement ,frag);
         })
